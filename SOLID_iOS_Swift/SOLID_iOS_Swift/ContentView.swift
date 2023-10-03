@@ -22,17 +22,22 @@ struct ContentView: View {
     
     func testSOLID() {
         
-        //SRP
+        //Without SRP
         let book = Book(id: "123", name: "SOLID", author: "Uncle Bob", description: "SOLID principles", price: 200)
         let invoiceWithoutSRP = InvoiceWithoutSRP(book: book, quantity: 2, discountPercentage: 10)
         invoiceWithoutSRP.printInvoice()
         
-        //OCP
+        //SRP
         let invoice = Invoice(book: book, quantity: 2, discountPercentage: 50, taxRate: 20)
         let invoicePrinter = InvoicePrinter(invoice: invoice)
         invoicePrinter.printInvoice()
         let invoicePersistence = InvoicePersistence(invoice: invoice)
         invoicePersistence.saveInvoiceToFile()
+        
+        //OCP
+        let coreDatapersistence = CoreDataPersistence()
+        let persistenceOCP = InvoicePersistenceOCP(persistence: coreDatapersistence)
+        persistenceOCP.save(invoice: invoice)
         
         //LSP1
         

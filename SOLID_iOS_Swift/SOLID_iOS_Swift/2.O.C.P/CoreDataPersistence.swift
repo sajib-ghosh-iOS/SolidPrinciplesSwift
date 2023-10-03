@@ -9,5 +9,6 @@ import Foundation
 class CoreDataPersistence: InvoicePersistenceProtocol{
     func save(invoice: Invoice) {
         //Saves invoice to core data
+        print("Saved into CoreData")
     }
 }
